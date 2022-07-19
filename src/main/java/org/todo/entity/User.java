@@ -1,9 +1,6 @@
 package org.todo.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,8 +9,9 @@ import java.util.List;
 @Builder
 @Entity
 @Getter
-@Setter
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -27,19 +25,19 @@ public class User {
     private String phone;
 
     @Enumerated(value = EnumType.STRING)
+    @Builder.Default
     private UserStatus userStatus = UserStatus.USER_ACTIVE;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "teamBoard", targetEntity = User_TeamBoard.class)
+//    @Builder.Default
     private List<TeamBoard> boards = new ArrayList<>();
-
-    public User() {}
 
     public enum UserStatus {
         USER_ACTIVE("활동 중"),
         USER_SLEEP("휴면 상태");
 
         @Getter
-        private String satus;
+        private final String satus;
 
         UserStatus(String status) { this.satus = status;}
     }

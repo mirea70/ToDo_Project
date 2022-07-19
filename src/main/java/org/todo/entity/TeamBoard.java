@@ -1,8 +1,6 @@
 package org.todo.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,9 +9,11 @@ import java.util.List;
 @Builder
 @Entity
 @Getter
-@Setter
-public class TeamBoard {
+@NoArgsConstructor
+@AllArgsConstructor
+public class TeamBoard extends BaseTimeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
 
     private String title;
@@ -26,10 +26,7 @@ public class TeamBoard {
 
     private int commentCnt;
 
-    @OneToMany(mappedBy = "teamBoard")
+    @OneToMany(mappedBy = "user", targetEntity = User_TeamBoard.class)
+//    @Builder.Default
     private List<User> wish_list = new ArrayList<>();
-
-    public TeamBoard() {}
-
-
 }

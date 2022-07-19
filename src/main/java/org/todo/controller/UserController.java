@@ -16,8 +16,8 @@ public class UserController {
     public ResponseEntity patchMember() {
         return null;
     }
-    @GetMapping
-    public ResponseEntity getMember() {
+    @GetMapping("/{userId}")
+    public ResponseEntity getMember(@PathVariable Long userId) {
         return null;
     }
     @GetMapping
