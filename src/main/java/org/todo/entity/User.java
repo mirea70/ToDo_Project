@@ -9,7 +9,7 @@ import java.util.List;
 
 @Builder
 @Entity
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseTimeEntity {
@@ -33,9 +33,12 @@ public class User extends BaseTimeEntity {
 //    @Builder.Default
     private List<TeamBoard> boards = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
     public enum UserRole {
         ROLE_USER("일반 사용자"),
-        ROLE_MANAGER("매니저"),
+        ROLE_TEAMBOSS("팀장"),
         ROLE_ADMIN("관리자");
 
         @Getter
@@ -51,8 +54,8 @@ public class User extends BaseTimeEntity {
         USER_SLEEP("휴면 상태");
 
         @Getter
-        private final String satus;
+        private final String status;
 
-        UserStatus(String status) { this.satus = status;}
+        UserStatus(String status) { this.status = status;}
     }
 }

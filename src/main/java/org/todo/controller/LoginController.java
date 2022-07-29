@@ -1,7 +1,6 @@
 package org.todo.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.todo.entity.User;
 import org.todo.service.UserService;
@@ -32,9 +31,9 @@ public class LoginController {
     }
 
     // 매니저 접근 가능 경로
-    @GetMapping("/manager")
+    @GetMapping("/boss")
     public String manager() {
-        return "manager";
+        return "You are TeamBoss";
     }
 
     // 관리자 접근 가능 경로
