@@ -1,6 +1,7 @@
 package org.todo.entity;
 
 import lombok.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,6 +32,19 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "teamBoard", targetEntity = User_TeamBoard.class)
 //    @Builder.Default
     private List<TeamBoard> boards = new ArrayList<>();
+
+    public enum UserRole {
+        ROLE_USER("일반 사용자"),
+        ROLE_MANAGER("매니저"),
+        ROLE_ADMIN("관리자");
+
+        @Getter
+        private final String role;
+
+        UserRole(String role) {
+            this.role = role;
+        }
+    }
 
     public enum UserStatus {
         USER_ACTIVE("활동 중"),
