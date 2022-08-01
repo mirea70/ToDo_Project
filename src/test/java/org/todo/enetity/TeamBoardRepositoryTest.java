@@ -8,6 +8,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.todo.entity.TeamBoard;
 import org.todo.repository.TeamBoardRepository;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,5 +30,7 @@ public class TeamBoardRepositoryTest {
         TeamBoard finded = teamBoardRepository.findById(1L).get();
 
         assertEquals("제목", finded.getTitle());
+
+        assertThat(finded.getTitle(), is("제목"));
     }
 }
