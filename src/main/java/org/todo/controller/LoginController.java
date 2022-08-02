@@ -1,6 +1,7 @@
 package org.todo.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.todo.dto.UserDto;
 import org.todo.entity.User;
@@ -11,15 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
+//@Controller
+
 public class LoginController {
 
     private final UserService userService;
 
     // 홈 화면
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
+//    @GetMapping("/")
+//    public String home() {
+//        return "index.html";
+//    }
 
     // 회원가입
     @PostMapping("/join")

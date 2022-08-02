@@ -29,4 +29,6 @@ public class TeamBoard extends BaseTimeEntity {
     @OneToMany(mappedBy = "user", targetEntity = User_TeamBoard.class)
 //    @Builder.Default
     private List<User> wish_list = new ArrayList<>();
+
+    private int wishCnt;
 }

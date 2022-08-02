@@ -13,3 +13,7 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+#  web:
+#    resources:
+#      static-locations: classpath:/templates/ , classpath:/static/
