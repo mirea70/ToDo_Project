@@ -1,12 +1,19 @@
-//package org.todo.controller;
-//
-//import lombok.Getter;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//public class BoardController {
-//    // 글쓰기
+package org.todo.controller;
+
+import lombok.Getter;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class BoardController {
+
+    @GetMapping("/post")
+    public String turnPost() {
+        return "post";
+    }
+
+    // 글쓰기
 //    @PostMapping
 //    public ResponseEntity PostTeamBoard() {
 //        return null;
@@ -32,4 +39,4 @@
 //    public ResponseEntity deleteTeamBoard() {
 //        return null;
 //    }
-//}
+}
