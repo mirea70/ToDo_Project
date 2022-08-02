@@ -19,8 +19,6 @@ public class User extends BaseTimeEntity {
 
     private String name;
 
-    private String loginId;
-
     private String pwd;
 
     private String phone;
@@ -57,5 +55,12 @@ public class User extends BaseTimeEntity {
         private final String status;
 
         UserStatus(String status) { this.status = status;}
+    }
+
+    public void update(String name, String pwd, String phone, UserStatus status) {
+        this.name = name;
+        this.pwd = pwd;
+        this.phone = phone;
+        this.userStatus = status;
     }
 }

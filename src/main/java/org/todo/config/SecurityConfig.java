@@ -31,12 +31,12 @@ public class SecurityConfig {
                 .apply(new CustomLogin())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/join").permitAll()
                 .antMatchers("/boss/**").access("hasRole('ROLE_TEAMBOSS') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .logout()
+                .lo
                 .logoutSuccessUrl("/");
         return httpSecurity.build();
     }
