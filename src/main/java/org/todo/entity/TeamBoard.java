@@ -19,6 +19,7 @@ public class TeamBoard extends BaseTimeEntity {
 
     private String title;
 
+    @Column(length = 3000)
     private String content;
 
     private String writer;  // User 클래스의 name 필드와 동일시할지 고민
