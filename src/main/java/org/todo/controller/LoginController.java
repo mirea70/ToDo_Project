@@ -19,10 +19,10 @@ public class LoginController {
     private final UserService userService;
 
     // 홈 화면
-//    @GetMapping("/")
-//    public String home() {
-//        return "index.html";
-//    }
+    @GetMapping("/")
+    public String home() {
+        return "index.html";
+    }
 
     // 회원가입
     @PostMapping("/join")
