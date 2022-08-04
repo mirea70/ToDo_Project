@@ -14,6 +14,7 @@ import org.todo.service.BoardService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/teamBoard")
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
@@ -30,14 +31,17 @@ public class BoardController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
     // 글 수정하기
-    @PatchMapping("/modify")
-    public ResponseEntity UpdateTeamBoard(TeamBoardDto.PatchDto patchDto) {
-        boardService.update(patchDto);
+    @PatchMapping("/modify/{bno}")
+    public ResponseEntity UpdateTeamBoard(
+            @PathVariable Long bno,
+            @RequestBody TeamBoardDto.PatchDto patchDto) {
+        boardService.update(patchDto, bno);
         return new ResponseEntity("수정이 완료되었습니다.", HttpStatus.OK);
     }
     // 글 불러오기(페이지네이션)
     @GetMapping
-    public ResponseEntity getTeamBoards(TeamBoardDto.List_RequestDto list_requestDto) {
+    public ResponseEntity getTeamBoards(
+            @RequestBody TeamBoardDto.List_RequestDto list_requestDto) {
         Page<TeamBoard> get_List = boardService.getList(list_requestDto);
         List<TeamBoard> find_List = get_List.getContent();
         return new ResponseEntity<>(new TeamBoardDto.List_ResponseDto<>(find_List, get_List), HttpStatus.OK);

@@ -44,7 +44,7 @@ public class TeamBoardDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PatchDto {
-        private Long bno;
+//        private Long bno;
         private String title;
         private String content;
         private String writer;

@@ -2,18 +2,14 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 4260
-    url: jdbc:mysql://localhost:3306/todo_project
-    username: root
+    url: jdbc:mysql://localhost:3366/todo_project
+    username: mirea70
   jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database:mysql
+  database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  hibernate:
+    ddl-auto: create
+  properties:
     hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-
-#  web:
-#    resources:
-#      static-locations: classpath:/templates/ , classpath:/static/
+      show_sql: true
+      format_sql: true

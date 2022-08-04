@@ -48,15 +48,20 @@ public class BoardService {
         return responseDto;
     }
 
-    public void update(TeamBoardDto.PatchDto patchDto) {
-        // 요청한 사용자가 글을 등록한 사용자가 맞는지 확인
-        TeamBoard finded = teamBoardRepository.findById(patchDto.getBno()).orElseThrow(
+    public void update(TeamBoardDto.PatchDto patchDto, Long bno) {
+        // 요청한 글이 존재하는 번호인지 확인
+        TeamBoard finded = teamBoardRepository.findById(bno).orElseThrow(
                 () -> new IllegalArgumentException("해당 글은 존재하지 않습니다.")
         );
+        // 요청한 사용자가 글을 등록한 사용자가 맞는지 확인
 
-        if(patchDto.getWriter() != finded.getWriter())
-        // 맞지 않으면, 에러 발생시키기
+        System.out.println(patchDto.getWriter());
+        System.out.println(finded.getWriter());
+
+        if(!patchDto.getWriter().equals(finded.getWriter())){
+            // 맞지 않으면, 에러 발생시키기
             throw new IllegalArgumentException("글을 등록한 회원이 아닙니다.");
+        }
         // 맞으면, 저장되있던 글 수정
         finded.update_Post(patchDto.getTitle(), patchDto.getContent());
    }
