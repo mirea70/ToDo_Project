@@ -12,6 +12,7 @@ import org.todo.entity.User;
 import org.todo.repository.TeamBoardRepository;
 import org.todo.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -82,11 +83,17 @@ public class BoardService {
                .build();
    }
 
-   public Page<TeamBoard> getList(TeamBoardDto.List_RequestDto list_requestDto) {
-        return teamBoardRepository.findAll(PageRequest.of(
+//   public Page<TeamBoard> getList(TeamBoardDto.List_RequestDto list_requestDto) {
+//        return teamBoardRepository.findAll(PageRequest.of(
+//                list_requestDto.getPage() -1, list_requestDto.getSize(),
+//                Sort.by("bno").descending()));
+//   }
+
+    public List<TeamBoard> getList_withSearch(TeamBoardDto.List_RequestDto list_requestDto) {
+        return teamBoardRepository.findByTitleContaining(list_requestDto.getKeyword(), PageRequest.of(
                 list_requestDto.getPage() -1, list_requestDto.getSize(),
                 Sort.by("bno").descending()));
-   }
+    }
 
    public void delete(Long bno) {
        TeamBoard finded = teamBoardRepository.findById(bno).orElseThrow(

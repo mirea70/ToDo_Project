@@ -42,9 +42,10 @@ public class BoardController {
     @GetMapping
     public ResponseEntity getTeamBoards(
             @RequestBody TeamBoardDto.List_RequestDto list_requestDto) {
-        Page<TeamBoard> get_List = boardService.getList(list_requestDto);
-        List<TeamBoard> find_List = get_List.getContent();
-        return new ResponseEntity<>(new TeamBoardDto.List_ResponseDto<>(find_List, get_List), HttpStatus.OK);
+//        Page<TeamBoard> get_List = boardService.getList(list_requestDto);
+//        List<TeamBoard> find_List = get_List.getContent();
+        List<TeamBoard> find_List = boardService.getList_withSearch(list_requestDto);
+        return new ResponseEntity<>(find_List, HttpStatus.OK);
     }
     // 글 1개 조회
     @GetMapping("/{bno}")

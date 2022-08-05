@@ -57,6 +57,7 @@ public class TeamBoardDto {
     public static class List_RequestDto {
         private int page;
         private int size;
+        private String keyword = "";
     }
 
     @Getter
