@@ -38,4 +38,8 @@ public class TeamBoard extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+
+    public void update_view(int viewCnt) {
+        this.viewCnt = viewCnt;
+    }
 }

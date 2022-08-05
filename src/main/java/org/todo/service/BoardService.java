@@ -66,11 +66,15 @@ public class BoardService {
         // 맞으면, 저장되있던 글 수정
         finded.update_Post(patchDto.getTitle(), patchDto.getContent());
    }
-   @Transactional(readOnly = true)
+
+   // getOne : 단순히 조회하는거랑, 글을 읽었을때랑 구분지어야하나?.. viewCnt를 올리려면 readOnly가 안된다.
+   @Transactional
    public TeamBoardDto.ResponseDto getOne(Long bno) {
        TeamBoard finded = teamBoardRepository.findById(bno).orElseThrow(
                () -> new IllegalArgumentException("해당 글은 존재하지 않습니다.")
        );
+       addviewCnt(finded);
+
        return TeamBoardDto.ResponseDto.builder()
                .bno(finded.getBno())
                .title(finded.getTitle())
@@ -100,5 +104,10 @@ public class BoardService {
                () -> new IllegalArgumentException("해당 글은 존재하지 않습니다.")
        );
        teamBoardRepository.delete(finded);
+   }
+
+   public void addviewCnt(TeamBoard teamBoard) {
+        teamBoard.update_view(teamBoard.getViewCnt() + 1);
+        teamBoardRepository.save(teamBoard);
    }
 }
