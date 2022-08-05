@@ -87,12 +87,14 @@ public class BoardService {
                .build();
    }
 
+   // 페이지네이션만
 //   public Page<TeamBoard> getList(TeamBoardDto.List_RequestDto list_requestDto) {
 //        return teamBoardRepository.findAll(PageRequest.of(
 //                list_requestDto.getPage() -1, list_requestDto.getSize(),
 //                Sort.by("bno").descending()));
 //   }
 
+    // 검색 + 페이지네이션
     public List<TeamBoard> getList_withSearch(TeamBoardDto.List_RequestDto list_requestDto) {
         return teamBoardRepository.findByTitleContaining(list_requestDto.getKeyword(), PageRequest.of(
                 list_requestDto.getPage() -1, list_requestDto.getSize(),
