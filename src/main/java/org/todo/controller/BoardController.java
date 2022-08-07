@@ -59,4 +59,9 @@ public class BoardController {
         boardService.delete(bno);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PatchMapping("/{bno}")
+    public ResponseEntity likeOne(@PathVariable Long bno) {
+        return null;
+    }
 }
