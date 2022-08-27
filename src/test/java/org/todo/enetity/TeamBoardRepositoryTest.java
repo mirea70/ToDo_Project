@@ -33,4 +33,15 @@ public class TeamBoardRepositoryTest {
 
         assertThat(finded.getTitle(), is("제목"));
     }
+
+    @Test
+    public void like_test() {
+//        teamBoardRepository.save(TeamBoard.builder()
+//                .title("제목")
+//                .build());
+
+        TeamBoard finded = teamBoardRepository.findById(1L).get();
+
+        System.out.println(finded.isLike());
+    }
 }

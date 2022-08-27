@@ -2,6 +2,7 @@ package org.todo.entity;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,6 +35,10 @@ public class TeamBoard extends BaseTimeEntity {
 
     private int wishCnt = 0;
 
+//    @Column(columnDefinition = "TINYINT(1)")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean like = false;
+
     public void update_Post(String title, String content) {
         this.title = title;
         this.content = content;
@@ -41,5 +46,13 @@ public class TeamBoard extends BaseTimeEntity {
 
     public void update_view(int viewCnt) {
         this.viewCnt = viewCnt;
+    }
+
+    public void change_Like() {
+        this.like = true;
+    }
+
+    public void update_wish_list(User user) {
+        wish_list.add(user);
     }
 }

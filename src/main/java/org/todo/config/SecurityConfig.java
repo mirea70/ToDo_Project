@@ -26,10 +26,10 @@ public class SecurityConfig {
         httpSecurity.csrf().disable();  // csrf 보호를 해제한다. csrf 보호 : get 요청을 제외한 Post, Patch, Delete 요청으로부터 보호한다.
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 디폴트인 세션, 쿠키 생성 허용 -> 불허
                 .and()
-                .formLogin()
+//                .formLogin()
 //                .loginPage()
-//                .httpBasic().disable()
-//                .apply(new CustomLogin())
+                .httpBasic().disable()
+                .apply(new CustomLogin())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/boss/**").access("hasRole('ROLE_TEAMBOSS') or hasRole('ROLE_ADMIN')")

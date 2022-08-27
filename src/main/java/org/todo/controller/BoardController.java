@@ -1,5 +1,8 @@
 package org.todo.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import io.jsonwebtoken.Jwts;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,9 +14,11 @@ import org.todo.dto.TeamBoardDto;
 import org.todo.entity.TeamBoard;
 import org.todo.service.BoardService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/teamBoard")
 @RequiredArgsConstructor
 public class BoardController {
@@ -60,8 +65,18 @@ public class BoardController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/{bno}")
-    public ResponseEntity likeOne(@PathVariable Long bno) {
+//    @RequestHeader Map<String, String> header
+    @PatchMapping("/like/{bno}")
+    public ResponseEntity likeOne(@PathVariable Long bno,
+                                  HttpServletRequest request
+                                  ) {
+        String jwtHeader = request.getHeader("Authorization").replace("Bearer ", "");
+
+//        String jwtHeader = header.get("Authorization").replace("Bearer ", "");
+        Long userId = JWT.require(Algorithm.HMAC512("todo jwt token")).build().verify(jwtHeader).getClaim("id").asLong();
+//        Long userId = (Long)Jwts.parser().setSigningKey("todo jwt token").parseClaimsJws(jwtHeader).getBody().get("id");
+
+        boardService.like(bno, userId);
         return null;
     }
 }
